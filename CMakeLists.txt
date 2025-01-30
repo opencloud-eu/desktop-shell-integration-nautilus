@@ -1,21 +1,17 @@
 cmake_minimum_required(VERSION 3.16)
 
 # we need at least one language for GNUInstallDirs
-project(owncloud-client-shell-integration-nautilus VERSION 6.1.0 LANGUAGES C)
+project(desktop-shell-integration-nautilus VERSION 1.0.0 LANGUAGES C)
 
-option(REQUIRE_OWNCLOUD_RESOURCES "We depend on the ownCloud resources, if your distribution does provide alternative icons you can disable this requirement" ON)
+option(REQUIRE_OPENCLOUD_RESOURCES "We depend on the OpenCloud resources, if your distribution does provide alternative icons you can disable this requirement" ON)
 
 include(FeatureSummary)
 include(GNUInstallDirs)
 
-if (REQUIRE_OWNCLOUD_RESOURCES)
-    find_package(ownCloudShellResources 1.0.0 REQUIRED)
-    set_package_properties(ownCloudShellResources PROPERTIES TYPE REQUIRED DESCRIPTION "Required ownCloud resources and icons" URL "https://github.com/owncloud/client-desktop-shell-integration-resources")
+if (REQUIRE_OPENCLOUD_RESOURCES)
+    find_package(OpenCloudShellResources 1.0.0 REQUIRED)
+    set_package_properties(OpenCloudShellResources PROPERTIES TYPE REQUIRED DESCRIPTION "Required OpenCloud resources and icons" URL "https://github.com/opencloud-eu/desktop-shell-integration-resources")
 endif()
-
-set(APPLICATION_NAME       "ownCloud" CACHE STRING "Branding parameter")
-set(APPLICATION_SHORTNAME  "ownCloud" CACHE STRING "Branding parameter")
-set(APPLICATION_EXECUTABLE "owncloud" CACHE STRING "Branding parameter")
 
 add_subdirectory(src)
 

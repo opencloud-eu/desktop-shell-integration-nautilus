@@ -1,9 +1,9 @@
 #
 # Copyright (C) by Klaas Freitag <freitag@owncloud.com>
 #
-# This program is the core of OwnCloud integration to Nautilus
-# It will be installed on /usr/share/nautilus-python/extensions/ with the paquet owncloud-client-nautilus
-# (https://github.com/owncloud/client/edit/master/shell_integration/nautilus/syncstate.py)
+# This program is the core of OpenCLoud integration to Nautilus
+# It will be installed on /usr/share/nautilus-python/extensions/ with the package opencloud-desktop-shell-integration-nautilus
+# (https://github.com/opencloud-eu/desktop-shell-integration-nautilus/blob/main/src/syncstate.py)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,9 +28,7 @@ import time
 
 from gi.repository import GObject, Nautilus
 
-# Note: setappname.sh will search and replace 'ownCloud' on this file to update this line and other
-# occurrences of the name
-appname = 'ownCloud'
+appname = 'OpenCloud'
 
 print("Initializing "+appname+"-client-nautilus extension")
 print("Using python version {}".format(sys.version_info))
@@ -176,7 +174,7 @@ class SocketConnect(GObject.GObject):
 socketConnect = SocketConnect()
 
 
-class MenuExtension_ownCloud(GObject.GObject, Nautilus.MenuProvider):
+class MenuExtension_OpenCloud(GObject.GObject, Nautilus.MenuProvider):
     def __init__(self):
         GObject.GObject.__init__(self)
 
@@ -291,17 +289,17 @@ class MenuExtension_ownCloud(GObject.GObject, Nautilus.MenuProvider):
         if not menu_items:
             return []
 
-        # Set up the 'ownCloud...' submenu
-        item_owncloud = Nautilus.MenuItem(
+        # Set up the 'OpenCloud...' submenu
+        item_opencloud = Nautilus.MenuItem(
             name='IntegrationMenu', label=self.strings.get('CONTEXT_MENU_TITLE', appname))
 
         submenu = Nautilus.Menu()
-        item_owncloud.set_submenu(submenu)
+        item_opencloud.set_submenu(submenu)
 
         for item in menu_items:
             submenu.append_item(item)
 
-        return [item_owncloud]
+        return [item_opencloud]
 
 
     def legacy_menu_items(self, files):
@@ -334,11 +332,11 @@ class MenuExtension_ownCloud(GObject.GObject, Nautilus.MenuProvider):
         if not shareable:
             return []
 
-        # Set up the 'ownCloud...' submenu
-        item_owncloud = Nautilus.MenuItem(
+        # Set up the 'OpenCloud...' submenu
+        item_opencloud = Nautilus.MenuItem(
             name='IntegrationMenu', label=self.strings.get('CONTEXT_MENU_TITLE', appname))
         menu = Nautilus.Menu()
-        item_owncloud.set_submenu(menu)
+        item_opencloud.set_submenu(menu)
 
         # Add share menu option
         item = Nautilus.MenuItem(
@@ -361,7 +359,7 @@ class MenuExtension_ownCloud(GObject.GObject, Nautilus.MenuProvider):
             item_emailprivatelink.connect("activate", self.context_menu_action, 'EMAIL_PRIVATE_LINK', filename)
             menu.append_item(item_emailprivatelink)
 
-        return [item_owncloud]
+        return [item_opencloud]
 
 
     def context_menu_action(self, menu, action, filename):
@@ -369,7 +367,7 @@ class MenuExtension_ownCloud(GObject.GObject, Nautilus.MenuProvider):
         socketConnect.sendCommand(action + ":" + filename + "\n")
 
 
-class SyncStateExtension_ownCloud(GObject.GObject, Nautilus.InfoProvider):
+class SyncStateExtension_OpenCloud(GObject.GObject, Nautilus.InfoProvider):
     def __init__(self):
         GObject.GObject.__init__(self)
 
