@@ -5,16 +5,11 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
     name: Build plugins
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Checkout resources
-        uses: actions/checkout@v4
-        with:
-          repository: owncloud/client-desktop-shell-integration-resources
-          path: resources
 
       - name: Install dependencies
         run: |
